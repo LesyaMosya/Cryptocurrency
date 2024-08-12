@@ -2,17 +2,17 @@ package com.example.cryptocurrencytraineetest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Cryptocurrency (
+data class Cryptocurrency(
     @SerializedName("id")
-    val id : String,
+    val id: String,
     @SerializedName("name")
-    val name : String,
+    val name: String,
     @SerializedName("image")
-    val imageURL : String,
+    val imageURL: String,
     @SerializedName("symbol")
-    val symbol : String,
+    val symbol: String,
     @SerializedName("current_price")
-    val currentPrice : Double,
-    @SerializedName("ath_change_percentage")
-    val changePercentage : Double
+    val currentPrice: Double,
+    @SerializedName("market_cap_change_percentage_24h")
+    val marketCapChangePercentage: Double
 )

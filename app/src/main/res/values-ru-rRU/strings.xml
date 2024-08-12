@@ -4,6 +4,7 @@
     <string name="app_name">Криптовалюты</string>
     <string name="description_str">Описание</string>
     <string name="error_str">Произошла какая-то ошибка :( \nПопробуем снова?</string>
-    <string name="try_again_str">Попробовать</string>
+    <string name="try_again_str">ПОПРОБОВАТЬ</string>
     <string name="caregories_str">Категории</string>
+    <string name="error_short_str">Произошла ошибка при загрузке</string>
 </resources>

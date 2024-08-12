@@ -2,7 +2,7 @@ package com.example.cryptocurrencytraineetest.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptocurrencytraineetest.model.CoinDescription
+import com.example.cryptocurrencytraineetest.model.CryptocurrencyWithDescription
 import com.example.cryptocurrencytraineetest.model.Cryptocurrency
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
@@ -17,45 +17,68 @@ class CryptViewModel @Inject constructor(
 
     private val perPage = 30
     val response = repository.response
+    val isUSD = repository.isUSD
+    val idCurrency = repository.idCurrency
 
-    init {
-        if (repository.isMainPage.value)
-            getCryptocurrencies("usd")
+
+    fun createEvent(e: Event) {
+        onEvent(e)
     }
 
-    fun getCryptocurrencies(vsCurrency: String) =
+    private fun onEvent(e: Event) {
+        when (e) {
+            is Event.LoadListOfCryptocurrencies -> {
+                repository.isUSD.value = true
+                getCryptocurrencies("usd")
+            }
+
+            is Event.ReloadListOfCryptocurrencies -> {
+                repository.isUSD.value = e.currency == "usd"
+                getCryptocurrencies(e.currency)
+            }
+
+            is Event.LoadCryptCard -> {
+                repository.idCurrency.value = e.id
+                getCryptocurrencyByName(repository.idCurrency.value)
+            }
+        }
+    }
+
+    private fun getCryptocurrencies(vsCurrency: String) =
         viewModelScope.launch {
             repository.getCryptocurrencies(vsCurrency, perPage).onStart {
                 repository.response.value = ApiState.Loading
             }.catch {
-                repository.response.value = ApiState.Failure(it)
+                repository.response.value = ApiState.Failure
             }.collect {
                 repository.response.value = ApiState.SuccessLoadingList(it)
             }
         }
 
-    fun getCryptocurrencyByName(id: String) =
+    private fun getCryptocurrencyByName(id: String) =
         viewModelScope.launch {
-            repository.isMainPage.value = false
-
             repository.getCryptocurrencyByName(id).onStart {
                 repository.response.value = ApiState.Loading
             }.catch {
-                repository.response.value = ApiState.Failure(it)
+                repository.response.value = ApiState.Failure
 
-            }.collect{
+            }.collect {
                 repository.response.value = ApiState.SuccessLoadingCoin(it)
-                repository.isMainPage.value = true
             }
         }
 }
 
+sealed class Event {
+    data object LoadListOfCryptocurrencies : Event()
+    data class ReloadListOfCryptocurrencies(val currency: String) : Event()
+    data class LoadCryptCard(val id: String) : Event()
+}
 
 sealed class ApiState {
     class SuccessLoadingList(val data: List<Cryptocurrency>) : ApiState()
-    class SuccessLoadingCoin(val data: CoinDescription) : ApiState()
+    class SuccessLoadingCoin(val data: CryptocurrencyWithDescription) : ApiState()
 
-    class Failure(val msg: Throwable) : ApiState()
-    data object Loading: ApiState()
-    data object Empty: ApiState()
+    data object Loading : ApiState()
+    data object Empty : ApiState()
+    data object Failure : ApiState()
 }

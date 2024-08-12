@@ -2,13 +2,13 @@ package com.example.cryptocurrencytraineetest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CoinDescription(
+data class CryptocurrencyWithDescription(
     @SerializedName("name")
     val name: String,
     @SerializedName("categories")
-    val categories : List<String>,
+    val categories: List<String>,
     @SerializedName("description")
-    val description : Map<String, String>,
+    val description: Map<String, String>,
     @SerializedName("image")
-    val listOfImages : Map<String, String>
+    val listOfImages: Map<String, String>
 )

@@ -3,8 +3,9 @@
     <string name="crypt_list_str">List of cryptocurrencies</string>
     <string name="description_str">Description</string>
     <string name="error_str">Some kind of error has occurred:( \nShall we try again?</string>
-    <string name="try_again_str">Try again</string>
+    <string name="try_again_str">TRY AGAIN</string>
     <string name="caregories_str">Categories</string>
     <string name="currency_usd_str" translatable="false">USD</string>
     <string name="currency_rub_str" translatable="false">RUB</string>
+    <string name="error_short_str">An error occurred while downloading</string>
 </resources>
