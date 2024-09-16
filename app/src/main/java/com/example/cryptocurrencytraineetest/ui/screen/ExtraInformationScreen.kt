@@ -29,8 +29,8 @@ import com.example.cryptocurrencytraineetest.R
 import com.example.cryptocurrencytraineetest.ui.screen.destinations.CryptListScreenDestination
 import com.example.cryptocurrencytraineetest.ui.util.Failure
 import com.example.cryptocurrencytraineetest.ui.util.Loading
-import com.example.cryptocurrencytraineetest.viewmodel.ApiState
-import com.example.cryptocurrencytraineetest.viewmodel.CryptViewModel
+import com.example.cryptocurrencytraineetest.data.ApiState
+import com.example.cryptocurrencytraineetest.ui.viewmodel.CryptViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 

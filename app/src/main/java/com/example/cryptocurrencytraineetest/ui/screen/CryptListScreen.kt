@@ -47,16 +47,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.cryptocurrencytraineetest.ui.util.DecimalFormatter
 import com.example.cryptocurrencytraineetest.R
-import com.example.cryptocurrencytraineetest.model.Cryptocurrency
-import com.example.cryptocurrencytraineetest.viewmodel.ApiState
-import com.example.cryptocurrencytraineetest.viewmodel.CryptViewModel
+import com.example.cryptocurrencytraineetest.data.model.Cryptocurrency
+import com.example.cryptocurrencytraineetest.data.ApiState
+import com.example.cryptocurrencytraineetest.ui.viewmodel.CryptViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.example.cryptocurrencytraineetest.ui.screen.destinations.ExtraInformationScreenDestination
 import com.example.cryptocurrencytraineetest.ui.util.Failure
 import com.example.cryptocurrencytraineetest.ui.util.Loading
-import com.example.cryptocurrencytraineetest.viewmodel.Event
+import com.example.cryptocurrencytraineetest.ui.viewmodel.Event
 import kotlinx.coroutines.launch
 import kotlin.text.Typography.dollar
 

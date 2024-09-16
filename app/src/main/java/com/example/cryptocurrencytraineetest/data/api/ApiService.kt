@@ -1,7 +1,7 @@
-package com.example.cryptocurrencytraineetest.api
+package com.example.cryptocurrencytraineetest.data.api
 
-import com.example.cryptocurrencytraineetest.model.CryptocurrencyWithDescription
-import com.example.cryptocurrencytraineetest.model.Cryptocurrency
+import com.example.cryptocurrencytraineetest.data.model.CryptocurrencyWithDescription
+import com.example.cryptocurrencytraineetest.data.model.Cryptocurrency
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path

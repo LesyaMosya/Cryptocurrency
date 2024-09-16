@@ -1,4 +1,4 @@
-package com.example.cryptocurrencytraineetest.api
+package com.example.cryptocurrencytraineetest.data.api
 
 import dagger.Module
 import dagger.Provides

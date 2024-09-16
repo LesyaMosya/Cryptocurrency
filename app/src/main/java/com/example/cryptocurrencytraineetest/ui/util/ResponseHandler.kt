@@ -28,8 +28,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.cryptocurrencytraineetest.R
-import com.example.cryptocurrencytraineetest.viewmodel.CryptViewModel
-import com.example.cryptocurrencytraineetest.viewmodel.Event
+import com.example.cryptocurrencytraineetest.ui.viewmodel.CryptViewModel
+import com.example.cryptocurrencytraineetest.ui.viewmodel.Event
 
 
 @Composable

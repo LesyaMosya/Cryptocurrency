@@ -1,12 +1,9 @@
-package com.example.cryptocurrencytraineetest.viewmodel
+package com.example.cryptocurrencytraineetest.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptocurrencytraineetest.model.CryptocurrencyWithDescription
-import com.example.cryptocurrencytraineetest.model.Cryptocurrency
+import com.example.cryptocurrencytraineetest.data.CryptRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,7 +12,6 @@ class CryptViewModel @Inject constructor(
     private val repository: CryptRepository
 ) : ViewModel() {
 
-    private val perPage = 30
     val response = repository.response
     val isUSD = repository.isUSD
     val idCurrency = repository.idCurrency
@@ -46,25 +42,12 @@ class CryptViewModel @Inject constructor(
 
     private fun getCryptocurrencies(vsCurrency: String) =
         viewModelScope.launch {
-            repository.getCryptocurrencies(vsCurrency, perPage).onStart {
-                repository.response.value = ApiState.Loading
-            }.catch {
-                repository.response.value = ApiState.Failure
-            }.collect {
-                repository.response.value = ApiState.SuccessLoadingList(it)
-            }
+            repository.getCryptocurrencies(vsCurrency)
         }
 
     private fun getCryptocurrencyByName(id: String) =
         viewModelScope.launch {
-            repository.getCryptocurrencyByName(id).onStart {
-                repository.response.value = ApiState.Loading
-            }.catch {
-                repository.response.value = ApiState.Failure
-
-            }.collect {
-                repository.response.value = ApiState.SuccessLoadingCoin(it)
-            }
+            repository.getCryptocurrencyByName(id)
         }
 }
 
@@ -72,13 +55,4 @@ sealed class Event {
     data object LoadListOfCryptocurrencies : Event()
     data class ReloadListOfCryptocurrencies(val currency: String) : Event()
     data class LoadCryptCard(val id: String) : Event()
-}
-
-sealed class ApiState {
-    class SuccessLoadingList(val data: List<Cryptocurrency>) : ApiState()
-    class SuccessLoadingCoin(val data: CryptocurrencyWithDescription) : ApiState()
-
-    data object Loading : ApiState()
-    data object Empty : ApiState()
-    data object Failure : ApiState()
 }

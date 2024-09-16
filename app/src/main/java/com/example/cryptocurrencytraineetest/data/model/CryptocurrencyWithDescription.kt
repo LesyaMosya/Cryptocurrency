@@ -1,4 +1,4 @@
-package com.example.cryptocurrencytraineetest.model
+package com.example.cryptocurrencytraineetest.data.model
 
 import com.google.gson.annotations.SerializedName
 
